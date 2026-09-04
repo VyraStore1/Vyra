@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vyra — Clothing Store</title>
+<style>
+  :root{
+    --bg:#1c1e22;
+    --panel:#24262b;
+    --panel-border:#2f3238;
+    --header-a:#23262b;
+    --header-b:#1a3b5c;
+    --blue:#1a5fb4;
+    --blue-hover:#2b7ae0;
+    --link:#4aa8ff;
+    --link-hover:#7cc4ff;
+    --text:#e0e0e0;
+    --text-dim:#999999;
+    --white:#ffffff;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI', Arial, sans-serif;
+    line-height:1.6;
+  }
+
+  a{color:var(--link); text-decoration:none;}
+  a:hover{color:var(--link-hover);}
+
+  /* ---- Header ---- */
+  header{
+    background:linear-gradient(90deg, var(--header-a), var(--header-b));
+    padding:14px 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+
+  .brand{
+    font-size:22px;
+    font-weight:600;
+    color:var(--text);
+    display:flex;
+    align-items:center;
+    gap:2px;
+    letter-spacing:0.5px;
+  }
+  .brand .first-letter{
+    font-size:28px;
+    font-weight:700;
+    color:var(--link);
+    font-family:Georgia, 'Times New Roman', serif;
+    line-height:1;
+  }
+  .brand .rest{
+    text-transform:lowercase;
+  }
+
+  nav{display:flex; gap:18px; flex-wrap:wrap;}
+  nav a{color:var(--text); font-size:14px;}
+  nav a:hover{color:var(--white);}
+
+  .search-box{
+    display:flex;
+    align-items:center;
+  }
+  .search-box input{
+    width:220px;
+    max-width:60vw;
+    padding:8px 12px;
+    font-size:14px;
+    border-radius:6px 0 0 6px;
+    border:1px solid #3a3d42;
+    background:#2a2d33;
+    color:var(--text);
+    outline:none;
+  }
+  .search-box button{
+    padding:8px 12px;
+    border:none;
+    border-radius:0 6px 6px 0;
+    background:var(--blue);
+    color:var(--white);
+    cursor:pointer;
+  }
+  .search-box button:hover{background:var(--blue-hover);}
+
+  /* ---- Hero ---- */
+  .hero{
+    max-width:1100px;
+    margin:40px auto;
+    padding:0 24px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
+    flex-wrap:wrap;
+  }
+  .hero-text h1{
+    font-size:32px;
+    color:var(--white);
+    font-weight:600;
+    max-width:480px;
+  }
+  .hero-text p{
+    margin-top:12px;
+    color:var(--text-dim);
+    max-width:420px;
+  }
+  .hero-text .cta{
+    display:inline-block;
+    margin-top:20px;
+    background:var(--blue);
+    color:var(--white);
+    padding:10px 20px;
+    border-radius:6px;
+  }
+  .hero-text .cta:hover{background:var(--blue-hover); color:var(--white);}
+
+  .hero-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:14px;
+    padding:22px;
+    width:260px;
+    text-align:center;
+  }
+  .hero-card .thumb{
+    width:100%; height:130px;
+    margin-bottom:14px;
+    background:linear-gradient(145deg, #2a2d33, #1a3b5c);
+    border-radius:10px;
+    border:1px solid #3a3d42;
+  }
+  .hero-card h3{color:var(--white); font-size:16px; margin-bottom:4px;}
+  .hero-card p{color:var(--link); font-weight:600;}
+
+  /* ---- Section title ---- */
+  .section{
+    max-width:1100px;
+    margin:0 auto;
+    padding:20px 24px 40px;
+  }
+  .section h2{
+    color:var(--white);
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:16px;
+  }
+
+  /* ---- Product / Shop Grid ---- */
+  .shop-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+    gap:16px;
+  }
+  .product-card{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    padding:14px;
+    text-align:center;
+  }
+  .product-card .thumb{
+    width:100%;
+    height:150px;
+    border-radius:8px;
+    margin-bottom:10px;
+    background:linear-gradient(135deg,#2a2d33,#1a3b5c);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--link);
+    font-size:13px;
+  }
+  .product-card h3{
+    font-size:15px;
+    color:var(--white);
+    margin-bottom:6px;
+  }
+  .product-card .price{
+    color:var(--link);
+    font-weight:600;
+    margin-bottom:10px;
+  }
+  .product-card button{
+    width:100%;
+    background:var(--blue);
+    color:var(--white);
+    border:none;
+    border-radius:6px;
+    padding:8px 0;
+    cursor:pointer;
+  }
+  .product-card button:hover{background:var(--blue-hover);}
+
+  /* ---- Post / Blog style block ---- */
+  .post{
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:10px;
+    padding:16px;
+    margin-bottom:14px;
+  }
+  .post h3{color:var(--white); margin-bottom:6px;}
+  .post p{color:#d0d0d0; font-size:14px;}
+
+  /* ---- Footer ---- */
+  footer{
+    background:#17181b;
+    color:var(--text-dim);
+    text-align:center;
+    padding:24px;
+    margin-top:30px;
+    font-size:13px;
+  }
+
+  ::-webkit-scrollbar{width:8px;}
+  ::-webkit-scrollbar-track{background:var(--bg);}
+  ::-webkit-scrollbar-thumb{background:var(--blue); border-radius:10px;}
+
+  @media(max-width:640px){
+    .hero{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><span class="first-letter">V</span><span class="rest">yra</span></div>
+  <nav>
+    <a href="#shop">Shop</a>
+    <a href="#collection">Collection</a>
+    <a href="#blog">Blog</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="search-box">
+    <input type="text" placeholder="Search products...">
+    <button type="button">Search</button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Vyra — clothing that fits your everyday</h1>
+    <p>Latest fashion collection, comfortable fabrics aur trendy designs — sab kuch ek hi jagah, seedha aapke ghar tak.</p>
+    <a href="#shop" class="cta">Shop Now</a>
+  </div>
+  <div class="hero-card">
+    <div class="thumb"></div>
+    <h3>New Arrival</h3>
+    <p>₹1,499</p>
+  </div>
+</section>
+
+<section id="shop" class="section">
+  <h2>Featured Products</h2>
+  <div class="shop-grid">
+    <div class="product-card">
+      <div class="thumb">Shirt</div>
+      <h3>Casual Cotton Shirt</h3>
+      <div class="price">₹899</div>
+      <button type="button">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <div class="thumb">Jeans</div>
+      <h3>Slim Fit Jeans</h3>
+      <div class="price">₹1,299</div>
+      <button type="button">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <div class="thumb">Jacket</div>
+      <h3>Denim Jacket</h3>
+      <div class="price">₹1,999</div>
+      <button type="button">Buy Now</button>
+    </div>
+    <div class="product-card">
+      <div class="thumb">Kurti</div>
+      <h3>Printed Kurti</h3>
+      <div class="price">₹749</div>
+      <button type="button">Buy Now</button>
+    </div>
+  </div>
+</section>
+
+<section id="blog" class="section">
+  <h2>Latest Updates</h2>
+  <div class="post">
+    <h3>New Winter Collection Launch Hua</h3>
+    <p>Is season ke liye naye designs aur fabrics, sirf Vyra pe available — abhi explore karein.</p>
+  </div>
+  <div class="post">
+    <h3>Free Delivery Is Weekend</h3>
+    <p>₹999 se upar ke orders par free delivery, poore India mein — offer limited time ke liye.</p>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Vyra. Sabhi rights reserved.
+</footer>
+
+</body>
+</html>
